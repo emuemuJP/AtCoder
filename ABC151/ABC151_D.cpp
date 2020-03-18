@@ -29,7 +29,6 @@ int32_t bfs(vector<vector<string>> grid) {
     int depth = 0;
     while(!q.empty()) {
         Corr now = q.front();q.pop();
-        //cerr << "\tnow:" << now.x << "," << now.y << endl;
         ispassed[now.y][now.x] = true;
         for(int i = 0; i < 4; i++) {
             int nextx = now.x + dx[i];
@@ -50,8 +49,6 @@ int32_t bfs(vector<vector<string>> grid) {
             depth = max(depth, next.depth);
             q.push(next);
         }
-        //cerr << "size:" << q.size() << endl;
-        //if(q.size()>0) cerr << "depth:" << q.front().depth << endl;
     }
     return depth;
 }
@@ -73,7 +70,6 @@ int main()
             mat[i][j] = line[j];
         }
     }
-    //cerr << H << "," << W <<endl;
     int max_distance = 0;
 
     for(size_t i=0;i<H; i++)
@@ -81,7 +77,6 @@ int main()
         for(size_t j=0;j<W; j++)
         {
             int cost = 0;
-            //cerr << mat[i][j] << " ";
             if(mat[i][j] == ".")
             {
                 Corr start = {(int)j, (int)i, 0};
@@ -90,7 +85,6 @@ int main()
             }
             max_distance = max(max_distance, cost);
         }
-        //cerr << endl;
     }
     cout << max_distance << endl;
     return 0;
