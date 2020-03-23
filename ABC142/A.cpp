@@ -26,8 +26,9 @@ int main()
     long idx=0;
     long N;
     cin >> N;
-    if(N % 2 == 0) cout << fixed << setprecision(10) << (N/2.0)/N << endl;
-    else cout << fixed << setprecision(10) << (N/2+1.0)/N << endl;
+    cout << fixed << setprecision(10);
+    if(N % 2 == 0) cout << (N/2.0)/N << endl;
+    else cout <<  (N/2+1.0)/N << endl;
 #ifdef TEST
     end = chrono::system_clock::now();
     cerr << static_cast<double>(chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0) << "[ms]" << endl;
