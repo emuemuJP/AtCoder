@@ -15,7 +15,7 @@ using namespace std;
 using ll = long long;
 const long long INF = (long long)1e18+1;
 #define DIV 1000000007
-//#define TEST
+#define TEST
 vector<ll> v;
 
 void dfs(int k, ll x)

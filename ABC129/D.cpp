@@ -38,7 +38,7 @@ int main()
             mat[i][j] = line[j];
         }
     }
-    std::vector<std::vector<long>> mat_L(H, vector<long>(W, 0));
+    std::vector<std::vector<long>> mat_count(H, vector<long>(W, 0));
     for(size_t i=0;i<H; i++)
     {
         long count = 0;
@@ -46,10 +46,9 @@ int main()
         {
             if(mat[i][j] == "#") count = 0;
             else count++;
-            mat_L[i][j] = count;
+            mat_count[i][j] += count;
         }
     }
-    std::vector<std::vector<long>> mat_R(H, vector<long>(W, 0));
     for(size_t i=0;i<H; i++)
     {
         long count = 0;
@@ -57,11 +56,10 @@ int main()
         {
             if(mat[i][j] == "#") count = 0;
             else count++;
-            mat_R[i][j] = count;
+            mat_count[i][j] += count;
             if(j==0) break;
         }
     }
-    std::vector<std::vector<long>> mat_D(H, vector<long>(W, 0));
     for(size_t j=0;j<W; j++)
     {
         long count = 0;
@@ -69,10 +67,10 @@ int main()
         {
             if(mat[i][j] == "#") count = 0;
             else count++;
-            mat_D[i][j] = count;
+            mat_count[i][j] += count;
         }
     }
-    std::vector<std::vector<long>> mat_U(H, vector<long>(W, 0));
+    long max_path=0;
     for(size_t j=0;j<W; j++)
     {
         long count = 0;
@@ -80,21 +78,12 @@ int main()
         {
             if(mat[i][j] == "#") count = 0;
             else count++;
-            mat_U[i][j] = count;
+            mat_count[i][j] += count;
+            max_path = max(max_path, -3+mat_count[i][j]);
             if(i==0) break;
         }
     }
-    long max_path = 0;
-    for(size_t i=0;i<H; i++)
-    {
-        for(size_t j=0;j<W; j++)
-        {
-            if(mat[i][j] == ".")
-            {
-                max_path = max(max_path, -3+mat_L[i][j]+mat_R[i][j]+mat_U[i][j]+mat_D[i][j]);
-            }
-        }
-    }
+
     cout << max_path << endl;
 #ifdef TEST
     end = chrono::system_clock::now();
