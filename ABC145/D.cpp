@@ -40,7 +40,6 @@ ll comb(ll n, ll r) {
     deno *= (r - i);
     deno %= DIV;
   }
-  // 分母の逆元
   res = modinv(deno, DIV);
   res = (res * mole) % DIV;
   return res;
