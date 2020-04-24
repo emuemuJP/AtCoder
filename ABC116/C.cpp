@@ -38,11 +38,8 @@ int main()
         if(h[i] > prev)
         {
             counter += h[i] - prev;
-            prev = h[i];
-        }else
-        {
-            prev = h[i];
         }
+        prev = h[i];
     }
     cout << counter << endl;
 #ifdef TEST
