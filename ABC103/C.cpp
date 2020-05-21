@@ -39,28 +39,49 @@ int main()
         if( (i+1) % 2 != 0) odd[v[i]]++;
         else even[v[i]]++;
     }
+    //for(auto i : odd) cerr << "odd:" << i.first << ":" << i.second << endl;
+    //for(auto i : even) cerr << "even:" << i.first << ":" << i.second << endl;
+    //cerr << "size:" << odd.size() << ":" << even.size() << endl;
 
     vector<pair<ll, ll>> a, b;
     for (auto o : odd) a.emplace_back(o.second, o.first);
 	for (auto e : even) b.emplace_back(e.second, e.first);
-	sort(a.rbegin(), a.rend());
+	//cerr << "size:" << a.size() << ":" << b.size() << endl;
+    sort(a.rbegin(), a.rend());
     sort(b.rbegin(), b.rend());
+    //for(auto i : a) cerr << i.first << ":" << i.second << endl;
+    //for(auto i : b) cerr << i.first << ":" << i.second << endl;
+
     if (a.front().second == b.front().second) {
 		int ans = a.front().first;
 		if (a.size() == 1 && b.size() == 1) {
 			cout << n / 2 << endl;
 			return 0;
 		}
-		if (a[1].first >= b[1].first) {
-			ans += a[1].first;
-		}
-		else {
-			ans += b[1].first;
-		}
-		cout << n - ans << endl;
+        ll index_a = 0, index_b = 0;
+        if(a.size()>1)  index_a++;
+        if(b.size()>1)  index_b++;
+		if(index_a == index_b)
+        {
+            if (a[index_a].first >= b[index_b].first) {
+                ans += a[index_a].first;
+            }
+            else {
+                ans += b[index_b].first;
+            }
+            cout << n - ans << endl;
+        }else
+        {
+            if(index_a > index_b)
+                ans += a[index_a].first;
+            else
+                ans += b[index_b].first;
+            cout << n - ans << endl;
+
+        }
 	}
 	else {
-		cout << n - a.front().first + b.front().first << endl;
+        cout << n - a.front().first - b.front().first << endl;
 	}
 	return 0;
     /*
