@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <cmath>
+#include <bitset>
+#include <iomanip>
+#include <stack>
+#include <list>
+#include <map>
+#include <unordered_map>
+#include <chrono>
+#include <numeric>
+using namespace std;
+using ll = long long;
+const ll INF = (ll)1e18+1;
+const ll DIV = 1000000007;
+//#define TEST
+int main()
+{
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+#ifdef TEST
+    chrono::system_clock::time_point start, end;
+    start = chrono::system_clock::now();
+#endif
+    long N;
+    cin >> N;
+    vector<long> A(N);
+    vector<long> B(N);
+    vector<long> C(N-1);
+    for(size_t i=0;i<N; i++)
+    {
+        cin >> A[i];
+    }
+    for(size_t i=0;i<N; i++)
+    {
+        cin >> B[i];
+    }
+    for(size_t i=0;i<N-1; i++)
+    {
+        cin >> C[i];
+    }
+    long total=0;
+    for(size_t i=0;i<N; i++)
+    {
+        total+=B[A[i]-1];
+        if(A[i]-1==A[i-1]) total+=C[A[i-1]-1];
+    }
+    cout << total << endl;
+#ifdef TEST
+    end = chrono::system_clock::now();
+    cerr << static_cast<double>(chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0) << "[ms]" << endl;
+#endif
+    return 0;
+}
