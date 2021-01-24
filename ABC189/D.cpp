@@ -48,7 +48,7 @@ void reverse(int index, bool x, bool y)
     }
     return;
 }
-
+ll dp[100][2];
 int main()
 {
     cin.tie(0);
@@ -66,6 +66,18 @@ int main()
         cin >> s;
         S.push_back(s);
     }
+    dp[0][0] = dp[0][1] = 1;
+    for(size_t i=0;i<N; i++)
+    {
+        if (S[i] == "AND") {
+            dp[i + 1][0] = dp[i][0] * 2 + dp[i][1];
+            dp[i + 1][1] = dp[i][1];
+        } else {
+            dp[i + 1][0] = dp[i][0];
+            dp[i + 1][1] = dp[i][0] + dp[i][1] * 2;
+        }
+    }
+    cout << (dp[N][1]) << endl;;
     /*
     for(ll b=0;b<(1<<(N+1)); b++)
     {
@@ -83,8 +95,8 @@ int main()
         //cerr << y[0]  << ":" << count << endl;
     }
     */
-    reverse(N-1, 0, 1);
-    cout << COUNT << endl;
+    //reverse(N-1, 0, 1);
+    //cout << COUNT << endl;
 #ifdef TEST
     end = chrono::system_clock::now();
     cerr << static_cast<double>(chrono::duration_cast<chrono::microseconds>(end - start).count() / 1000.0) << "[ms]" << endl;
